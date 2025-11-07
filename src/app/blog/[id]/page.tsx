@@ -87,43 +87,76 @@ const BlogDetailPage: FC = () => {
         {/* Content */}
         <div className="px-[5vw] md:px-[8vw] max-w-[90vw] md:max-w-[80vw] mx-auto">
           <div className="prose prose-invert max-w-none">
-            <div
-              className="text-[1.3vw] md:text-[2vw] text-text-1/90 leading-[1.8] space-y-[2vw] md:space-y-[2.5vw]"
-              dangerouslySetInnerHTML={{
-                __html: post.content
-                  .split('\n')
-                  .map((line) => {
-                    // Handle headers
-                    if (line.startsWith('# ')) {
-                      return `<h1 class="text-[2.5vw] md:text-[4vw] font-bold text-text-1 mt-[3vw] md:mt-[4vw] mb-[1.5vw] md:mb-[2vw]">${line.substring(2)}</h1>`;
-                    }
-                    if (line.startsWith('## ')) {
-                      return `<h2 class="text-[2vw] md:text-[3.5vw] font-bold text-primary mt-[2.5vw] md:mt-[3vw] mb-[1.2vw] md:mb-[1.5vw]">${line.substring(3)}</h2>`;
-                    }
-                    if (line.startsWith('### ')) {
-                      return `<h3 class="text-[1.7vw] md:text-[2.8vw] font-semibold text-text-1 mt-[2vw] md:mt-[2.5vw] mb-[1vw] md:mb-[1.2vw]">${line.substring(4)}</h3>`;
-                    }
-                    // Handle lists
-                    if (line.startsWith('- ')) {
-                      return `<li class="ml-[2vw] md:ml-[3vw] mb-[0.8vw] md:mb-[1vw]">${line.substring(2)}</li>`;
-                    }
-                    if (line.startsWith(/\d+\. /)) {
-                      return `<li class="ml-[2vw] md:ml-[3vw] mb-[0.8vw] md:mb-[1vw]">${line.substring(line.indexOf(' ') + 1)}</li>`;
-                    }
-                    // Handle bold
-                    if (line.includes('**')) {
-                      line = line.replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary font-semibold">$1</strong>');
-                    }
-                    // Regular paragraphs
-                    if (line.trim()) {
-                      return `<p class="mb-[1.5vw] md:mb-[2vw]">${line}</p>`;
-                    }
-                    return '';
-                  })
-                  .filter(Boolean)
-                  .join(''),
-              }}
-            />
+            <div className="text-[1.3vw] md:text-[2vw] text-text-1/90 leading-[1.8]">
+              {post.content.split('\n\n').map((paragraph, idx) => {
+                // Handle headers
+                if (paragraph.startsWith('# ')) {
+                  return (
+                    <h1 key={idx} className="text-[2.5vw] md:text-[4vw] font-bold text-text-1 mt-[3vw] md:mt-[4vw] mb-[1.5vw] md:mb-[2vw]">
+                      {paragraph.substring(2)}
+                    </h1>
+                  );
+                }
+                if (paragraph.startsWith('## ')) {
+                  return (
+                    <h2 key={idx} className="text-[2vw] md:text-[3.5vw] font-bold text-primary mt-[2.5vw] md:mt-[3vw] mb-[1.2vw] md:mb-[1.5vw]">
+                      {paragraph.substring(3)}
+                    </h2>
+                  );
+                }
+                if (paragraph.startsWith('### ')) {
+                  return (
+                    <h3 key={idx} className="text-[1.7vw] md:text-[2.8vw] font-semibold text-text-1 mt-[2vw] md:mt-[2.5vw] mb-[1vw] md:mb-[1.2vw]">
+                      {paragraph.substring(4)}
+                    </h3>
+                  );
+                }
+                // Handle lists
+                if (paragraph.includes('\n- ') || paragraph.startsWith('- ')) {
+                  const items = paragraph.split('\n').filter(l => l.trim().startsWith('- '));
+                  return (
+                    <ul key={idx} className="list-disc ml-[3vw] md:ml-[4vw] mb-[1.5vw] md:mb-[2vw] space-y-[0.8vw] md:space-y-[1vw]">
+                      {items.map((item, i) => {
+                        const text = item.substring(2);
+                        return (
+                          <li key={i} className="text-[1.3vw] md:text-[2vw]">
+                            <span dangerouslySetInnerHTML={{
+                              __html: text.replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary font-semibold">$1</strong>')
+                            }} />
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  );
+                }
+                if (paragraph.match(/^\d+\. /)) {
+                  const items = paragraph.split('\n').filter(l => l.trim().match(/^\d+\. /));
+                  return (
+                    <ol key={idx} className="list-decimal ml-[3vw] md:ml-[4vw] mb-[1.5vw] md:mb-[2vw] space-y-[0.8vw] md:space-y-[1vw]">
+                      {items.map((item, i) => {
+                        const text = item.replace(/^\d+\. /, '');
+                        return (
+                          <li key={i} className="text-[1.3vw] md:text-[2vw]">
+                            <span dangerouslySetInnerHTML={{
+                              __html: text.replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary font-semibold">$1</strong>')
+                            }} />
+                          </li>
+                        );
+                      })}
+                    </ol>
+                  );
+                }
+                // Regular paragraphs
+                if (paragraph.trim()) {
+                  return (
+                    <p key={idx} className="mb-[1.5vw] md:mb-[2vw]" dangerouslySetInnerHTML={{
+                      __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary font-semibold">$1</strong>')
+                    }} />
+                  );
+                }
+                return null;
+              })}
+            </div>
           </div>
         </div>
 
