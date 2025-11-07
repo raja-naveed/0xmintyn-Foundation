@@ -1,20 +1,17 @@
 'use client';
-import { FC, use } from 'react';
+import { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { BLOG_DATA } from '@/data';
 import Navigation from '@/widgets/Navigation';
 import Footer from '@/widgets/Footer';
 import ShadowCursor from '@/components/ui/ShadowCursor';
 
-interface Props {
-  params: Promise<{ id: string }>;
-}
-
-const BlogDetailPage: FC<Props> = ({ params }) => {
-  const { id } = use(params);
+const BlogDetailPage: FC = () => {
   const router = useRouter();
+  const params = useParams();
+  const id = params?.id as string;
   const post = BLOG_DATA.find((p) => p.id === id);
 
   if (!post) {
