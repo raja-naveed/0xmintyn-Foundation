@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  &::selection {
+    @apply bg-primary text-bg-1;
+  }
+}
+
+html,
+body {
+  font-family: 'Montserrat', sans-serif;
+  @apply text-text-1;
+  background-color: #141218;
+  color: #E6E0E9;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #141218;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .align-center {
+    text-align: center;
+  }
+}
+
+//navigation
+.burger {
+  width: 100%;
+  &::after,
+  &::before {
+    content: '';
+    display: block;
+    height: 0.15vw;
+    width: 50%;
+    margin: auto;
+    background-color: #CCC2DC;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  &::after {
+    top: -0.25vw;
+  }
+
+  &::before {
+    top: 0.25vw;
+  }
+}
+
+.burgerActive {
+  &::after {
+    transform: rotate(45deg);
+    top: 0;
+  }
+
+  &::before {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
