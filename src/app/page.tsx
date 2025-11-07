@@ -6,6 +6,7 @@ import About from '@/widgets/About';
 import Services from '@/widgets/Services';
 import Impact from '@/widgets/Impact';
 import Partner from '@/widgets/Partner';
+import Blog from '@/widgets/Blog';
 import FAQ from '@/widgets/FAQ';
 import Contact from '@/widgets/Contact';
 import Footer from '@/widgets/Footer';
@@ -20,6 +21,7 @@ export default function Home() {
       <Services />
       <Impact />
       <Partner />
+      <Blog />
       <FAQ />
       <Contact />
       <Footer />
