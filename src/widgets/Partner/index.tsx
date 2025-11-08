@@ -11,11 +11,6 @@ interface Props {}
 const Index: FC<Props> = () => {
   const router = useRouter();
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <SectionOpacity classes="flex flex-col justify-center min-h-screen border-t border-gray-1">
       <div className="mx-auto flex w-full max-w-[75vw] md:max-w-[92%] flex-1 flex-col items-center justify-center text-center py-[5vw] md:py-[7vw] px-[3vw] md:px-[4vw]">
@@ -89,14 +84,14 @@ const Index: FC<Props> = () => {
 
         <div className="mt-[2.5vw] md:mt-[3.5vw] flex gap-[1.5vw] md:flex-col md:gap-[2vw]">
           <Button
-            onClick={() => scrollToSection('contact')}
-            title="Contact Us"
+            onClick={() => router.push('/partner')}
+            title="Become a Partner"
             classes="px-[1.8vw] py-[0.9vw] md:px-[3.5vw] md:py-[1.8vw] text-[1.1vw] md:text-[1.8vw] bg-bg-1 hover:bg-bg-1/80"
             btnClasses=""
           />
           <Button
-            onClick={() => scrollToSection('faq')}
-            title="View FAQ"
+            onClick={() => router.push('/donate')}
+            title="Support the Mission"
             classes="px-[1.8vw] py-[0.9vw] md:px-[3.5vw] md:py-[1.8vw] text-[1.1vw] md:text-[1.8vw] bg-primary/20 hover:bg-primary/30 text-primary border border-primary/50"
             btnClasses=""
           />

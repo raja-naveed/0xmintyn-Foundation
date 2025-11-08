@@ -71,7 +71,7 @@ const Hero = () => {
             btnClasses=""
           />
           <Button
-            onClick={() => scrollToSection('partner')}
+            onClick={() => router.push('/donate')}
             title={HERO_DATA.ctaSecondary}
             classes="px-[2.2vw] py-[1vw] md:px-[3.5vw] md:py-[1.8vw] text-[1.1vw] md:text-[1.8vw] bg-primary/20 hover:bg-primary/30 text-primary border border-primary/50 min-w-[18vw] md:min-w-[25vw]"
             btnClasses=""
