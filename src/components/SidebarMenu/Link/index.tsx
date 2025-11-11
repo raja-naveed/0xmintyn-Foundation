@@ -1,7 +1,10 @@
-import { motion } from 'framer-motion';
-import { slide, scale } from '@/shared/utils/animations';
+'use client';
 
 import { FC } from 'react';
+
+import { motion } from 'framer-motion';
+
+import { slide, scale } from '@/shared/utils/animations';
 
 interface Props {
   data: any;

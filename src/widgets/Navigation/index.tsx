@@ -41,7 +41,7 @@ const Index: FC<Props> = () => {
       >
         <div className="relative w-[3.5vw] h-[3.5vw] md:w-[5vw] md:h-[5vw] flex-shrink-0">
           <Image
-            src="/images/logo.png"
+            src="https://app.0xmintyn.com/logo.png"
             alt="0xMintyn Foundation Logo"
             fill
             className="object-contain group-hover:opacity-80 transition-opacity duration-300"
