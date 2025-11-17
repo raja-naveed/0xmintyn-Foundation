@@ -1,6 +1,5 @@
 'use client';
 import { FC, useEffect, useState } from 'react';
-import Image from 'next/image';
 
 import SidebarMenu from '@/components/SidebarMenu';
 import { AnimatePresence } from 'framer-motion';
@@ -40,11 +39,10 @@ const Index: FC<Props> = () => {
         className="p-[1.5vw] md:p-[2vw] fixed z-[100] top-0 left-0 group flex items-center gap-[0.8vw] md:gap-[1.2vw] hover:opacity-80 transition-opacity duration-300"
       >
         <div className="relative w-[3.5vw] h-[3.5vw] md:w-[5vw] md:h-[5vw] flex-shrink-0">
-          <Image
+          <img
             src="https://app.0xmintyn.com/logo.png"
             alt="0xMintyn Foundation Logo"
-            fill
-            className="object-contain group-hover:opacity-80 transition-opacity duration-300"
+            className="w-full h-full object-contain group-hover:opacity-80 transition-opacity duration-300"
           />
         </div>
         <span className="text-[1.3vw] md:text-[2vw] font-bold text-text-1 group-hover:text-primary transition-colors duration-300">
